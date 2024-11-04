@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2x2 Clickable Tile Table</title>
+</head>
+<body>
+
+<table id="imageTable" border="1" style="width: 200px; height: 200px;">
+  <tr>
+    <td id="tile1" onclick="switchImage('tile1')">Tile 1</td>
+    <td id="tile2" onclick="switchImage('tile2')">Tile 2</td>
+  </tr>
+  <tr>
+    <td id="tile3" onclick="switchImage('tile3')">Tile 3</td>
+    <td id="tile4" onclick="switchImage('tile4')">Tile 4</td>
+  </tr>
+</table>
+
+<script>
+  // Image sources
+  const images = [
+    'path/to/image1.png',
+    'path/to/image2.png',
+    'path/to/image3.png'
+  ];
+
+  // Track the current image index for each tile
+  const tileImages = {
+    tile1: 0,
+    tile2: 0,
+    tile3: 0,
+    tile4: 0
+  };
+
+  function switchImage(tileId) {
+    // Move to the next image in the array for the tile
+    tileImages[tileId] = (tileImages[tileId] + 1) % images.length;
+
+    // Update the tile content with the new image
+    const img = document.createElement('img');
+    img.src = images[tileImages[tileId]];
+    img.style.width = '100%';
+    img.style.height = '100%';
+
+    // Clear any existing content in the tile and add the new image
+    const tile = document.getElementById(tileId);
+    tile.innerHTML = '';
+    tile.appendChild(img);
+  }
+</script>
+
+</body>
+</html>
